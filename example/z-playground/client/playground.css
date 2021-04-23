@@ -1,0 +1,47 @@
+/* This file is part of Dream, released under the MIT license. See LICENSE.md
+   for details, or visit https://github.com/aantron/dream.
+
+   Copyright 2021 Anton Bachin */
+
+
+
+body {
+  margin: 0;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+#editor {
+  float: left;
+  width: 50%;
+}
+
+#client {
+  float: left;
+  width: 50%;
+}
+
+
+
+/* Editor */
+
+#textarea, #log {
+  font-family: Iosevka, SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+}
+
+#textarea .CodeMirror {
+  height: calc(100% - 210px);
+}
+
+#log {
+  margin: 0;
+  height: 180px;
+}
+
+
+
+/* Client */
+
+iframe {
+  border: 0;
+}

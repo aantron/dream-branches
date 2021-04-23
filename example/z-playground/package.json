@@ -1,0 +1,11 @@
+{
+  "name": "dream-playground",
+  "dependencies": {
+    "codemirror": "*",
+    "inliner": "*"
+  },
+  "scripts": {
+    "bundle": "mkdir -p static && inliner -m client/index.html > static/index.html",
+    "start": "npm run bundle && opam exec -- dune exec ./playground.exe"
+  }
+}

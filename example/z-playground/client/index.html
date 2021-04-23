@@ -1,0 +1,33 @@
+<!-- This file is part of Dream, released under the MIT license. See LICENSE.md
+     for details, or visit https://github.com/aantron/dream.
+
+     Copyright 2021 Anton Bachin -->
+
+
+
+<html>
+<head>
+
+<script src="../node_modules/codemirror/lib/codemirror.js"></script>
+<link rel="stylesheet" href="../node_modules/codemirror/lib/codemirror.css">
+<script src="../node_modules/codemirror/mode/javascript/javascript.js"></script>
+
+<link rel="stylesheet" href="playground.css">
+
+</head>
+<body>
+
+<div id="editor">
+  <button>Run</button>
+  <div id="textarea"></div>
+  <pre id="log"></pre>
+</div>
+<div id="client">
+  <input id="location"></input>
+  <iframe width="100%" height="100"></iframe>
+</div>
+
+<script src="playground.js"></script>
+
+</body>
+</html>
