@@ -1,0 +1,15 @@
+name: dream-digitalocean-app
+
+services:
+- name: web
+  image:
+    registry_type: DOCR
+    repository: app-esy
+    tag: TAG
+
+  http_port: 8080
+  routes:
+  - path: /
+
+  instance_size_slug: basic-xxs
+  instance_count: 1

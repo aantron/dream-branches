@@ -1,0 +1,37 @@
+name: digitalocean-app-esy
+on:
+  push:
+    paths: 'example/z-digitalocean-app/**'
+
+env:
+  REGISTRY: registry.digitalocean.com/dream-example
+  IMAGE: app-esy
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: example/z-digitalocean-app
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: actions/setup-node@v2
+      with:
+        node-version: 14
+    - run: npm install -g esy
+
+    - uses: esy/github-action@v1
+      with:
+        cache-key: 1-${{ hashFiles('esy.json') }}
+        working-directory: example/z-digitalocean-app
+    - run: "esy cp '#{self.target_dir}/default/app.exe' ."
+    - run: docker build -t $REGISTRY/$IMAGE:$(echo $GITHUB_SHA | head -c7) .
+
+    - uses: digitalocean/action-doctl@v2
+      with:
+        token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+    - run: doctl registry login --expiry-seconds 600
+    - run: docker push $REGISTRY/$IMAGE:$(echo $GITHUB_SHA | head -c7)
+    - run: sed s/TAG/$(echo $GITHUB_SHA | head -c7)/g < app.template.yaml > app.yaml
+    - run: doctl apps update $(doctl apps list --no-header --format ID) --spec app.yaml
